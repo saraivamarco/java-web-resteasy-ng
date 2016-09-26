@@ -1,17 +1,10 @@
 # Instructions:
 
 ## Download and install Node.js
+https://nodejs.org/en/
 
 ## Go the app root folder and execute
 npm install
-
-## Open system.js.config.js and add the following line
-System.config({
-  packages: [
-    'angular2-datatable': { defaultExtension: 'js' },
-    ...
-  ]
-});
 
 ## Update npm
 npm update
