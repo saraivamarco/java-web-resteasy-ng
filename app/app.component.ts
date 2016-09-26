@@ -13,9 +13,8 @@ import './rxjs-operators';
 export class AppComponent implements OnInit {
   sendFileUrl : string;
   data : CsvRow[];
+  vheaders : String[];
   errorMessage : 'Observable';
-  nvars :  CsvRow[] = [];
- 
 
     constructor(private dataService: DataService, private configuration: Configuration) { 
       this.dataService=dataService;
@@ -24,22 +23,29 @@ export class AppComponent implements OnInit {
  
     ngOnInit() {
         this.getObservableItems();
-        //this.getPromiseData();
-        this.nvars = this.dataService.getExtractData();
-        
+        this.getObservableVarHeaders();
+        //this.getPromiseData();        
     }
 
     getObservableItems() {
       this.dataService.getFiles()
                       .subscribe(
                         rawdata => this.data = rawdata,
-                        error =>  this.errorMessage = <any>error); //this.nvars = this.data[0].vars;
+                        error =>  this.errorMessage = <any>error);
     }
 
+    getObservableVarHeaders() {
+        this.dataService.getVarHeaders()
+                      .subscribe(
+                        rawdata => this.vheaders = rawdata,
+                        error =>  this.errorMessage = <any>error);
+    }
+
+    /** Optional way to retrieve data - w/Promise */
     getPromiseData() {
       this.dataService.getData()
-      .then(rawdata => this.data = rawdata,
-                     error =>  this.errorMessage = <any>error); //this.nvars = this.data[0].vars;
+                    .then(rawdata => this.data = rawdata,
+                     error =>  this.errorMessage = <any>error);
       
     }
 

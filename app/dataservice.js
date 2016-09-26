@@ -17,15 +17,23 @@ var DataService = (function () {
         this.http = http;
         this.configuration = configuration;
         this.actionUrl = configuration.ServerWithApiUrl + 'rs/csv/';
+        this.actionUrl2 = configuration.ServerWithApiUrl + 'rs/csv/vheaders/';
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
     }
+    /** Preferred way to retrieve data - with Observable */
     DataService.prototype.getFiles = function () {
         return this.http.get(this.actionUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };
+    DataService.prototype.getVarHeaders = function () {
+        return this.http.get(this.actionUrl2)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    /** Optional way to retrieve data - with Promise*/
     DataService.prototype.getData = function () {
         return this.http.get(this.actionUrl)
             .toPromise()
@@ -35,15 +43,10 @@ var DataService = (function () {
     DataService.prototype.extractData = function (res) {
         var body = res.json();
         //debugger;
-        this.extatData = body;
         return body || {};
     };
-    DataService.prototype.getExtractData = function () {
-        return this.extatData;
-    };
     DataService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
+        // Dig deeper into the error to get a better message
         var errMsg = (error.message) ? error.message :
             error.status ? error.status + " - " + error.statusText : 'Server error';
         console.error(errMsg); // log to console instead

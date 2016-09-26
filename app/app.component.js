@@ -17,24 +17,29 @@ var AppComponent = (function () {
     function AppComponent(dataService, configuration) {
         this.dataService = dataService;
         this.configuration = configuration;
-        this.nvars = [];
         this.dataService = dataService;
         this.sendFileUrl = configuration.ServerWithApiUrl + 'upload';
     }
     AppComponent.prototype.ngOnInit = function () {
         this.getObservableItems();
-        //this.getPromiseData();
-        this.nvars = this.dataService.getExtractData();
+        this.getObservableVarHeaders();
+        //this.getPromiseData();        
     };
     AppComponent.prototype.getObservableItems = function () {
         var _this = this;
         this.dataService.getFiles()
-            .subscribe(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; }); //this.nvars = this.data[0].vars;
+            .subscribe(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; });
     };
+    AppComponent.prototype.getObservableVarHeaders = function () {
+        var _this = this;
+        this.dataService.getVarHeaders()
+            .subscribe(function (rawdata) { return _this.vheaders = rawdata; }, function (error) { return _this.errorMessage = error; });
+    };
+    /** Optional way to retrieve data - w/Promise */
     AppComponent.prototype.getPromiseData = function () {
         var _this = this;
         this.dataService.getData()
-            .then(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; }); //this.nvars = this.data[0].vars;
+            .then(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; });
     };
     AppComponent = __decorate([
         core_1.Component({

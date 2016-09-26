@@ -8,28 +8,35 @@ import { Configuration } from './app.constants';
 export class DataService {
 
     private actionUrl: string;
+    private actionUrl2: string;
     private headers: Headers;
 
     private extatData;
-    //private vars;
-
-    public vars;
 
     constructor(private http: Http, private configuration: Configuration) {
 
         this.actionUrl = configuration.ServerWithApiUrl + 'rs/csv/';
+        this.actionUrl2= configuration.ServerWithApiUrl + 'rs/csv/vheaders/';
 
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
     }
 
+    /** Preferred way to retrieve data - with Observable */
     getFiles(): Observable<CsvRow[]> {
         return this.http.get(this.actionUrl)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
 
+    getVarHeaders(): Observable<String[]> {
+        return this.http.get(this.actionUrl2)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
+
+    /** Optional way to retrieve data - with Promise*/
     getData (): Promise<CsvRow[]> {
         return this.http.get(this.actionUrl)
                     .toPromise()
@@ -41,17 +48,11 @@ export class DataService {
     private extractData(res: Response) {
       let body = res.json();
       //debugger;
-      this.extatData = body;
       return body || { };
     }
 
-    getExtractData(){
-      return this.extatData;
-    }
-
     private handleError (error: any) {
-      // In a real world app, we might use a remote logging infrastructure
-      // We'd also dig deeper into the error to get a better message
+      // Dig deeper into the error to get a better message
       let errMsg = (error.message) ? error.message :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
       console.error(errMsg); // log to console instead
