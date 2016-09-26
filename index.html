@@ -15,10 +15,41 @@
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <!-- Jquery support -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
     <script>
+        /** Not being used - To keep just in case we decide later on
+         * to use javascript to upload the file.
+        */
+        function fileUpload() {
+            //disable the default form submission
+            event.preventDefault();
+            //grab all form data  
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    alert('Form Submitted!');
+                },
+                error: function(){
+                    alert("error in ajax form submission");
+                }
+            });
+            return false;
+
+        }
+
       System.import('app').catch(function(err){ console.error(err); });
+    
     </script>
   </head>
   <!-- 3. Display the application -->

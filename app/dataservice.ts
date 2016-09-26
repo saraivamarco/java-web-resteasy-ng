@@ -10,8 +10,10 @@ export class DataService {
     private actionUrl: string;
     private headers: Headers;
 
-    private extactData;
+    private extatData;
     //private vars;
+
+    public vars;
 
     constructor(private http: Http, private configuration: Configuration) {
 
@@ -37,10 +39,14 @@ export class DataService {
 
 
     private extractData(res: Response) {
-      let body = res.json();      
-      //this.vars = body[0].vars;
+      let body = res.json();
       //debugger;
+      this.extatData = body;
       return body || { };
+    }
+
+    getExtractData(){
+      return this.extatData;
     }
 
     private handleError (error: any) {

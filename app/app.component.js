@@ -17,22 +17,24 @@ var AppComponent = (function () {
     function AppComponent(dataService, configuration) {
         this.dataService = dataService;
         this.configuration = configuration;
+        this.nvars = [];
         this.dataService = dataService;
         this.sendFileUrl = configuration.ServerWithApiUrl + 'upload';
     }
     AppComponent.prototype.ngOnInit = function () {
-        //this.getObservableItems();
-        this.getPromiseData();
+        this.getObservableItems();
+        //this.getPromiseData();
+        this.nvars = this.dataService.getExtractData();
     };
     AppComponent.prototype.getObservableItems = function () {
         var _this = this;
         this.dataService.getFiles()
-            .subscribe(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; }); //this.nvars = this.data[0].vars;
     };
     AppComponent.prototype.getPromiseData = function () {
         var _this = this;
         this.dataService.getData()
-            .then(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; });
+            .then(function (rawdata) { return _this.data = rawdata; }, function (error) { return _this.errorMessage = error; }); //this.nvars = this.data[0].vars;
     };
     AppComponent = __decorate([
         core_1.Component({

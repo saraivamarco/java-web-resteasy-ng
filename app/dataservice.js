@@ -13,7 +13,6 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 var app_constants_1 = require('./app.constants');
 var DataService = (function () {
-    //private vars;
     function DataService(http, configuration) {
         this.http = http;
         this.configuration = configuration;
@@ -35,9 +34,12 @@ var DataService = (function () {
     };
     DataService.prototype.extractData = function (res) {
         var body = res.json();
-        //this.vars = body[0].vars;
         //debugger;
+        this.extatData = body;
         return body || {};
+    };
+    DataService.prototype.getExtractData = function () {
+        return this.extatData;
     };
     DataService.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure

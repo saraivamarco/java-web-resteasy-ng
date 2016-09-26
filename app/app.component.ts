@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   sendFileUrl : string;
   data : CsvRow[];
   errorMessage : 'Observable';
+  nvars :  CsvRow[] = [];
+ 
 
     constructor(private dataService: DataService, private configuration: Configuration) { 
       this.dataService=dataService;
@@ -21,21 +23,23 @@ export class AppComponent implements OnInit {
     }
  
     ngOnInit() {
-        //this.getObservableItems();
-        this.getPromiseData();
+        this.getObservableItems();
+        //this.getPromiseData();
+        this.nvars = this.dataService.getExtractData();
+        
     }
 
     getObservableItems() {
       this.dataService.getFiles()
                       .subscribe(
                         rawdata => this.data = rawdata,
-                        error =>  this.errorMessage = <any>error);
+                        error =>  this.errorMessage = <any>error); //this.nvars = this.data[0].vars;
     }
 
     getPromiseData() {
       this.dataService.getData()
       .then(rawdata => this.data = rawdata,
-                     error =>  this.errorMessage = <any>error);
+                     error =>  this.errorMessage = <any>error); //this.nvars = this.data[0].vars;
       
     }
 
