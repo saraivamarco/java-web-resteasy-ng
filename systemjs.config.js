@@ -24,8 +24,7 @@
       // other libraries
       'rxjs':                       'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
-      'angular2-datatable': 		'npm:angular2-datatable',
-      'lodash':						'npm:lodash'
+	  'primeng':                    'node_modules/primeng'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -40,13 +39,7 @@
         main: './index.js',
         defaultExtension: 'js'
       },
-	  'angular2-datatable': { 
-		  defaultExtension: 'js' 
-	  },
-	  lodash: {
-		  main: './lodash.js',
-		  defaultExtension: 'js'
-	  }
+	  'primeng': { defaultExtension: 'js' }
     }
   });
 })(this);

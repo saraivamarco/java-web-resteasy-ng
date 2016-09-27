@@ -19,11 +19,16 @@ var AppComponent = (function () {
         this.configuration = configuration;
         this.dataService = dataService;
         this.sendFileUrl = configuration.ServerWithApiUrl + 'upload';
+        this.cols = [
+            { field: 'id', header: 'Id' },
+            { field: 'vars', header: 'Vars' },
+            { field: 'decision', header: 'Decision' }
+        ];
     }
     AppComponent.prototype.ngOnInit = function () {
         this.getObservableItems();
         this.getObservableVarHeaders();
-        //this.getPromiseData();        
+        //this.getPromiseData();               
     };
     AppComponent.prototype.getObservableItems = function () {
         var _this = this;
@@ -47,9 +52,10 @@ var AppComponent = (function () {
             templateUrl: 'app.html',
             providers: [dataservice_1.DataService, app_constants_1.Configuration]
         }), 
-        __metadata('design:paramtypes', [dataservice_1.DataService, app_constants_1.Configuration])
+        __metadata('design:paramtypes', [(typeof (_a = typeof dataservice_1.DataService !== 'undefined' && dataservice_1.DataService) === 'function' && _a) || Object, app_constants_1.Configuration])
     ], AppComponent);
     return AppComponent;
+    var _a;
 }());
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

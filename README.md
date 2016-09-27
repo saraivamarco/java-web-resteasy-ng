@@ -11,5 +11,3 @@ npm update
 
 ## Transpile code
 npm start
-
-

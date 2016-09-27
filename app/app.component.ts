@@ -4,6 +4,7 @@ import { CsvRow } from './csv-row';
 import { Configuration } from './app.constants';
 // Add the RxJS Observable operators we need in this app.
 import './rxjs-operators';
+import {DataTableModule,SharedModule} from 'primeng/primeng';
 
 @Component({
   selector: 'my-app',
@@ -13,18 +14,25 @@ import './rxjs-operators';
 export class AppComponent implements OnInit {
   sendFileUrl : string;
   data : CsvRow[];
+  cols: any[];
   vheaders : String[];
   errorMessage : 'Observable';
 
     constructor(private dataService: DataService, private configuration: Configuration) { 
       this.dataService=dataService;
       this.sendFileUrl = configuration.ServerWithApiUrl + 'upload';
+      this.cols = [
+            {field: 'id', header: 'Id'},
+            {field: 'vars', header: 'Vars'},
+            {field: 'decision', header: 'Decision'}
+        ];
+        
     }
  
     ngOnInit() {
         this.getObservableItems();
         this.getObservableVarHeaders();
-        //this.getPromiseData();        
+        //this.getPromiseData();               
     }
 
     getObservableItems() {

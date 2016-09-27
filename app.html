@@ -1,50 +1,47 @@
 <br/>
+
 <div class="form-group">
     <form method="POST" action={{sendFileUrl}} enctype="multipart/form-data" >
-        <p>File:</p>
-        <input type="file" name="file" id="file" />
-        <p>Destination for temp files:</p>
+        <input class="btn btn-primary btn-sm" type="file" name="file" id="file" />
+        <br/>
+        <input class="btn btn-primary btn-sm" type="submit"  onClick="document.getElementsByName('redirect')[0].value = window.location.pathname" value="Upload to" name="upload" id="upload" />
         <input type="text" value="c:/temp" name="destination"/>
-        
-        <input type="submit"  onClick="document.getElementsByName('redirect')[0].value = window.location.pathname" value="Upload" name="upload" id="upload" />
     </form>
 </div>
 <br/>
-<div><p>Variable headers count : {{vheaders?.length}}</p>
+<div> <!-- <p>Variable headers count : {{vheaders?.length}}</p> -->
 
-    
-
-    <table class="table table-striped" [mfData]="data" #mf="mfDataTable" > <!--[mfRowsOnPage]="5"-->
+    <!-- Default looks, does what I need -->
+    <table id ="table" class="table table-striped" onloadedmetadata="$('#table').DataTable()" > 
         <thead>
         <tr>
             <th style="width: 2%">
-                <mfDefaultSorter by="id">Id</mfDefaultSorter>
+                Id
             </th>
             <th *ngFor="let vheader of vheaders; let i = index" style="width: 5%">                
-                <mfDefaultSorter by="value">{{vheader}}</mfDefaultSorter>
+                {{vheader}}
             </th>
             <th style="width: 10%">
-                <mfDefaultSorter by="decision">Decision</mfDefaultSorter>
+                Decision
             </th>
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of data">
+            <tr *ngFor="let item of data" style="width: 2%">
                 <td>{{item.id}}</td>
-                <td *ngFor="let value of item.vars">
-                    <p>{{value}}</p>
-                </td>
-                <td>{{item.decision}}</td>
+                <td *ngFor="let value of item.vars" style="width: 5%">{{value}}</td>
+                <td style="width: 10%">{{item.decision}}</td>
             </tr>
         </tbody>
         <tfoot>
-            <!--
-        <tr>
-            <td colspan="4">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-            </td>
-        </tr>
-        -->
+            
         </tfoot>
     </table>
+    
+    <!-- With PrimeNG - looks good, but doesn't do what I need (uncomment bellow for testing) -->
+    <!--
+    <p-dataTable [value]="data">
+        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+    </p-dataTable>
+    -->
 </div>
