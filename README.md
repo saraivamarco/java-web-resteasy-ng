@@ -11,3 +11,5 @@ npm update
 
 ## Transpile code
 npm start
+
+![alt tag](https://github.com/saraivamarco/java-web-resteasy-ng/blob/master/lite-server.png)
