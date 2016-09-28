@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-import { CsvRow } from './csv-row';
-import { Configuration } from './app.constants';
+import { Observable } from 'rxjs/Observable';
+import { CsvRow } from '../dto/csv-row';
+import { Configuration } from '../constants/app.constants';
 
 @Injectable()
 export class DataService {

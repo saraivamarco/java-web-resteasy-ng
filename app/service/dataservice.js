@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
-var app_constants_1 = require('./app.constants');
+var app_constants_1 = require('../constants/app.constants');
 var DataService = (function () {
     function DataService(http, configuration) {
         this.http = http;
