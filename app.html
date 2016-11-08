@@ -10,34 +10,12 @@
 </div>
 <br/>
 <div> <!-- <p>Variable headers count : {{vheaders?.length}}</p> -->
+    <h1>Angular2 DataTable</h1>
 
     <!-- Default looks, does what I need -->
-    <table id ="table" class="table table-striped" onloadedmetadata="$('#table').DataTable()" > 
-        <thead>
-        <tr>
-            <th style="width: 2%">
-                Id
-            </th>
-            <th *ngFor="let vheader of vheaders; let i = index" style="width: 5%">                
-                {{vheader}}
-            </th>
-            <th style="width: 10%">
-                Decision
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of data" style="width: 2%">
-                <td>{{item.id}}</td>
-                <td *ngFor="let value of item.vars" style="width: 5%">{{value}}</td>
-                <td style="width: 10%">{{item.decision}}</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            
-        </tfoot>
+    <table id ="table" #table class="table table-striped">
     </table>
-    
+
     <!-- With PrimeNG - looks good, but doesn't do what I need (uncomment bellow for testing) -->
     <!--
     <p-dataTable [value]="data">
